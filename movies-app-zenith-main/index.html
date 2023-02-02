@@ -1,6 +1,3 @@
-
-
-
 <!--Original Code -->
 
 <!--<!DOCTYPE html>-->
@@ -17,9 +14,6 @@
 
 <!--&lt;!&ndash; A local JS file to store the firebase API Key. WARNING: Do not commit this file &ndash;&gt;-->
 <!--<script src="js/keys.js"></script>-->
-
-<!--&lt;!&ndash; Utilities and higher level functions to simplify database fetches &ndash;&gt;-->
-<!--<script src="js/firebase-config.js"></script>-->
 
 <!--&lt;!&ndash; Your local JS file to add functions that interact with the database &ndash;&gt;-->
 <!--<script src="js/movies-api.js"></script>-->
@@ -43,19 +37,21 @@
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
     <!--    FONT KIT -->
-    <script src="https://kit.fontawesome.com/6bffcc9069.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aboreto&display=swap" rel="stylesheet">
 
-
+    <!-- CSS LINK -->
     <link rel="stylesheet" href="../css/movies-app.css">
 
 </head>
 <body>
-<nav class="navbar sticky-top navbar-light mb-0" style="background-color: #09090a;">
-    <h4 class="text-light "><i class="fas fa-film"></i>Cinema Flow</h4>
+<nav class="navbar sticky-top navbar-light mb-0" style="background-color: lightslategrey;">
+    <h4 class="text-light "><i class="fas fa-film"></i>Movie Classics</h4>
     <a class="text-light" href="#">Home</a>
-    <a class="text-light" href="#">TV Shows & Movies</a>
-    <a class="text-light" href="#">New & Popular</a>
-    <a class="text-light" href="#">My List <i class="fas fa-list"></i></a>
+    <a class="text-light" href="#">Movies</a>
+    <a class="text-light" href="#">Hot Picks</a>
+    <a class="text-light" href="#">Our Faves <i class="fas fa-list"></i></a>
     <a class=" text-light" href="#"><i class="fas fa-bell"></i><i class="far fa-user-circle"></i></a>
 </nav>
 <hr>
@@ -141,7 +137,6 @@
 </footer>
 
 
-
 <!------JQUERY ------->
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
         crossorigin="anonymous"></script>
@@ -152,12 +147,16 @@
 <!--KEYS SCRIPT JS-->
 <script src="js/keys.js"></script>
 
-
-
+<!-- MOVIES JS -->
 <script src="js/movies-api.js"></script>
 
+<!-- The core Firebase JS SDK and Databse library -->
+<script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-firestore.js"></script>
 
-<!--end of bootstrap-->
+<!-- Utilities and higher level functions to simplify database fetches -->
+<script src="js/firebase-config.js"></script>
+
 
 </body>
 </html>

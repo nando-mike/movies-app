@@ -9,7 +9,7 @@
 
 "use strict";
 
-$(document).ready(function(){
+$(document).ready(function () {
     let movieArray = [];
     let url = "https://screeching-screeching-fright.glitch.me/movies";
     const moviePosters = () => {
@@ -44,23 +44,23 @@ $(document).ready(function(){
     moviePosters();
 
     //========Show the edit menu========\\
-    $("#showEdit").click(function() {
+    $("#showEdit").click(function () {
         $("#editMovie").toggleClass("hidden1");
         $("#selectMenu").toggleClass("hidden1");
     });
     //hide edit menu
-    $("#changeMovie").click(function(){
+    $("#changeMovie").click(function () {
         $("#editMovie").toggleClass("hidden1");
         $("#selectMenu").toggleClass("hidden1");
     })
 
     //========show the delete menu========\\
-    $(".remove-hidden").click(function() {
+    $(".remove-hidden").click(function () {
         $("#selectMenu2").toggleClass("hidden1");
         $("#delete-movie").toggleClass("hidden1");
     });
     //hide delete menu
-    $("#delete-movie").click(function(){
+    $("#delete-movie").click(function () {
         $("#selectMenu2").toggleClass("hidden1");
         $("#delete-movie").toggleClass("hidden1");
     })
@@ -70,12 +70,12 @@ $(document).ready(function(){
         $("#postMovie").toggleClass("hidden1");
     });
     //hide post menu
-    $("#newMovie").click(function() {
+    $("#newMovie").click(function () {
         $("#postMovie").toggleClass("hidden1");
     })
 
     //when the option selected is changed, update the input fields
-    $("#selectMenu").change(function(){
+    $("#selectMenu").change(function () {
         let target = $(this).val()
         console.log(target);
 
@@ -91,13 +91,13 @@ $(document).ready(function(){
         }
     })
 
-    function createStars(movie){
+    function createStars(movie) {
         let html = "";
-        for(var i = 0; i < movie.rating; i++){
+        for (var i = 0; i < movie.rating; i++) {
             html += "<i class=\"fas fa-star\" style='color: yellow'></i>"
         }
-        if(movie.rating !== 5){
-            for(var j = movie.rating; j < 5; j++){
+        if (movie.rating !== 5) {
+            for (var j = movie.rating; j < 5; j++) {
                 html += "<i class=\"fas fa-star\"></i>";
             }
         }
@@ -105,7 +105,7 @@ $(document).ready(function(){
     }
 
     //Edit selected movie
-    $("#changeMovie").click(function(){
+    $("#changeMovie").click(function () {
         let input = $("#selectMenu").val()
         let insert = {
             title: $("#newTitle").val(),
@@ -134,10 +134,10 @@ $(document).ready(function(){
         }
     };
 
-    $("#selectMenu2").change(function()  {
+    $("#selectMenu2").change(function () {
         let inputVal = $(this).val();
         console.log("hello: " + inputVal);
-        $("#delete-movie").click(function() {
+        $("#delete-movie").click(function () {
             //DELETE request
             fetch(`${url}/${inputVal}`, deleteOptions)
                 .then(moviePosters);
@@ -167,6 +167,6 @@ $(document).ready(function(){
         fetch(url, postOptions)
             .then(resp => resp.json())
             .then(moviePosters).catch(error => console.log(error))
-    });
+    });})
 
 //end of document ready
