@@ -44,6 +44,6 @@ const addMovie = async (movie) => {
     return await response.json();
 }
 
-console.log(addMovie())
+
 // Here is where you will create your own functions to further interact with the database.
 // HAPPY CODING!!!
