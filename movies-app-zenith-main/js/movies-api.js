@@ -42,24 +42,80 @@ const addMovie = async (movie) => {
     };
     let response = await db.fetch(url, options);
     return await response.json();
+
+
+}
+/** ADDED GET MOVIE FUNTION */
+
+const getMovie = async (movie) => {
+    try {
+        const url = `/movies/${movie.id}`;
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        let response = await db.fetch(url, options);
+        return await response.json();
+    } catch (e) {
+        console.error(e);
+    }
 }
 
-// const addMovie = async (movie) => {
-//     try {
-//         const url = '/movies';
-//         const options = {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify(movie),
-//         };
-//         let response = await db.fetch(url, options);
-//         return await response.json();
-//     } catch (e) {
-//         console.error(e);
-//     }}
 
+
+
+/** ADDED MOVIE OBJECT */
+
+// let movieObject = {
+//     id: '34kjkj34g5k5jgkg13133',
+//     title: 'Hercules',
+//     year: 1994,
+//     director: 'Somebody IDK',
+//     rating: 9.3,
+//     runtime: 142,
+//     genre: 'Drama',
+//     actors: 'Tim Robbins',
+// }
+// // Call the function
+// addMovie(movieObject);
+
+
+/** ADDED UPDATE MOVIE FUNCTION */
+
+const updateMovie = async (movie) => {
+    try {
+        const url = `/movies/${movie.id}`;
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(movie),
+        };
+        let response = await db.fetch(url, options);
+        return await response.json();
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+const deleteMovie = async (movie) => {
+    try {
+        const url = `/movies/${movie.id}`;
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        let response = await db.fetch(url, options);
+        return await response.json();
+    } catch (e) {
+        console.error(e);
+    }
+}
 
 // Here is where you will create your own functions to further interact with the database.
 // HAPPY CODING!!!
