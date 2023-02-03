@@ -12,6 +12,21 @@
 
 }
 
+#button-shadow {
+    box-shadow: 2px 4px 20px 4px #0B090A !important;
+}
+
+#display-movies {
+    box-shadow: 2px 4px 20px 4px #0B090A !important;
+}
+
+.bg-blue {
+    background-color: #5e72e4 !important;
+}
+
+#windows-logo {
+    font-size: smaller;
+}
 
 /*@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap');*/
 
