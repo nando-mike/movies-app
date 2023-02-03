@@ -1,13 +1,31 @@
-// (async () => {
-//     // This is the entry point for your application. Write all of your code here.
-//     // Before you can use the database, you need to configure the "db" object
-//     // with your team name in the "js/movies-api.js" file.
-//
-//
-// })();
+(async () => {
+    // This is the entry point for your application. Write all of your code here.
+    // Before you can use the database, you need to configure the "db" object
+    // with your team name in the "js/movies-api.js" file.
+    "use strict";
+
+    let movies = await getMovies();
+    console.log(movies);
+
+    let html = ``;
+    movies.forEach((movie)=>{
+        html += `<div class="card d-flex flex-row" style="width: 18rem;">
+  <div class="card-body">
+    <h3 class="card-title">${movie.title}</h3>
+    <p class="card-title">${movie.director}</p>
+    <p class="card-title">Year: ${movie.year}</p>
+    <p class="card-title">Genre: ${movie.genre}</p>
+  </div>
+</div>`
+    });
 
 
-// "use strict";
+    $(`#movies-here`).html(html);
+
+})();
+
+
+
 //
 // $(document).ready(function () {
 //     let movieArray = [];
