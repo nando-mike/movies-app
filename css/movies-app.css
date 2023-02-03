@@ -1,3 +1,16 @@
+#buttons {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#nav {
+    box-shadow: 2px 4px 20px 4px #0B090A !important;
+    text-shadow: 2px 2px black;
+    background-size: cover;
+
+}
 
 /*@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap');*/
 

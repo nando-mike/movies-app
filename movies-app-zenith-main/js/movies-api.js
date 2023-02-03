@@ -25,7 +25,7 @@ const getMovies = async () => {
 }
 console.log(getMovies())
 
-// And here is a function that will add a new movie:
+//FUNCTION THAT ADDS A NEW MOVIE //
 const addMovie = async (movie) => {
     // "movie" is an object that contains the movie data
     // Example: {title: "The Matrix", year: 1999, rating: 5}
@@ -43,6 +43,22 @@ const addMovie = async (movie) => {
     let response = await db.fetch(url, options);
     return await response.json();
 }
+
+// const addMovie = async (movie) => {
+//     try {
+//         const url = '/movies';
+//         const options = {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify(movie),
+//         };
+//         let response = await db.fetch(url, options);
+//         return await response.json();
+//     } catch (e) {
+//         console.error(e);
+//     }}
 
 
 // Here is where you will create your own functions to further interact with the database.
