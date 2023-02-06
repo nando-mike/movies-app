@@ -1,7 +1,5 @@
 (async () => {
-    // This is the entry point for your application. Write all of your code here.
-    // Before you can use the database, you need to configure the "db" object
-    // with your team name in the "js/movies-api.js" file.
+
     "use strict";
 
 // MOVIES ARRAY //
@@ -19,7 +17,25 @@
         return obj.id;
     });
 
-    console.log(movieIDs)
+    console.log(movieIDs);
+
+// loop gets posters from api
+    let moviePosters = [];
+    const getThePosters = async () => {
+        for (let i = 0; i < movieTitles.length; i += 1) {
+            await $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=" + `${movieTitles[i]}` + "&callback=?", function (json) {
+                let posterData = '';
+                if (json != "Nothing found.") {
+                    // console.log(json.results[0].poster_path);
+                    posterData = json.results[0].poster_path;
+                    moviePosters.push(posterData);
+                }
+            });
+        }
+    }
+
+    await getThePosters();
+    console.log(moviePosters)
 
     let html = ``;
 
@@ -27,9 +43,10 @@
     const writeHtml = () => {
 
         for(let i = 0; i < movies.length; i += 1){
-            html += `<div class="card col-3 mt-3 p-3 d-flex flex-column this-item movie-card" data-movie-id="${movieIDs[i]}" data-movie-title="${movies[i].title}" data-movie-year="${movies[i].year}" data-movie-genre="${movies[i].genre}" data-movie-director="${movies[i].director}">
+            html += `<div class="card mt-3 p-3 d-flex flex-column this-item movie-card" data-movie-id="${movieIDs[i]}" data-movie-title="${movies[i].title}" data-movie-year="${movies[i].year}" data-movie-genre="${movies[i].genre}" data-movie-director="${movies[i].director}">
   <div class="card-body">
-    <h3 class="card-title">${movies[i].title}</h3>
+  <img src="http://image.tmdb.org/t/p/w500/${moviePosters[i]}" class="poster" alt="current movie poster">
+    <h3 class="card-title mt-3">${movies[i].title}</h3>
     <p class="card-title">${movies[i].director}</p>
     <p class="card-title">Year: ${movies[i].year}</p>
     <p class="card-title">Genre: ${movies[i].genre}</p>
@@ -48,19 +65,7 @@ Update
     }
 
     await writeHtml();
-
-    // end of page load
-
-    // let delBtnHtml=`<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    //                 Delete a Movie
-    //             </button>`
-    // let delItemsHtml=``;
-    //
-    // movies.forEach(function(movie){
-    //     delItemsHtml +=`<li class="del-item" data-movie-id="${movie.id}">${movie.title}</li>`
-    // })
-    //
-    // $(`#delete-menu-here`).html(`${delBtnHtml}<ul class="dropdown-menu">${delItemsHtml}</ul>`);
+    // END OF PAGE LOAD //
 
     $(document).on(`click`, `.del-item`, async (e) => {
         let currentID = $(e.target).parent(`.this-item`).attr(`data-movie-id`)
@@ -100,6 +105,25 @@ Update
         });
         location.reload();
     });
+
+    $(document).on(`click`, `#newMovie`, async (e) =>{
+        e.preventDefault();
+        let title = $(`#title`).val();
+        let director = $(`#director`).val();
+        let year = $(`#year`).val();
+        let genre = $(`#genre`).val();
+        console.log(title)
+        console.log(director)
+        console.log(year)
+        console.log(genre)
+        await addMovie({
+            title: title,
+            director: director,
+            year: year,
+            genre: genre
+        });
+        location.reload();
+    })
 
 
 
