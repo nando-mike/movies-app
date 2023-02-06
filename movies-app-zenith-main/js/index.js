@@ -4,214 +4,104 @@
     // with your team name in the "js/movies-api.js" file.
     "use strict";
 
+// MOVIES ARRAY //
     let movies = await getMovies();
     console.log(movies);
 
+// MAP ARRAY //
+    let movieTitles = movies.map(function (obj) {
+        return obj.title;
+    });
+
+    console.log(movieTitles);
+
+    let movieIDs = movies.map(function(obj){
+        return obj.id;
+    });
+
+    console.log(movieIDs)
+
     let html = ``;
-    movies.forEach((movie) => {
-        html += `<div class="card d-flex flex-row" style="width: 18rem;">
+
+
+    const writeHtml = () => {
+
+        for(let i = 0; i < movies.length; i += 1){
+            html += `<div class="card col-3 mt-3 p-3 d-flex flex-column this-item movie-card" data-movie-id="${movieIDs[i]}" data-movie-title="${movies[i].title}" data-movie-year="${movies[i].year}" data-movie-genre="${movies[i].genre}" data-movie-director="${movies[i].director}">
   <div class="card-body">
-    <h3 class="card-title">${movie.title}</h3>
-    <p class="card-title">${movie.director}</p>
-    <p class="card-title">Year: ${movie.year}</p>
-    <p class="card-title">Genre: ${movie.genre}</p>
+    <h3 class="card-title">${movies[i].title}</h3>
+    <p class="card-title">${movies[i].director}</p>
+    <p class="card-title">Year: ${movies[i].year}</p>
+    <p class="card-title">Genre: ${movies[i].genre}</p>
   </div>
+<button class="button del-item" data-btn="${movieIDs[i]}">
+Delete
+</button>
+<button class="button up-item" data-btn="${movieIDs[i]}">
+Update
+</button>
 </div>`
-    });
 
-
-    $(`#movies-here`).html(html);
-
-
-
-    //START OF FIRST POSTED CODE-- DELETE AS NEEDED
-
-        // let movieArray = [];
-        // let url = "https://screeching-screeching-fright.glitch.me/movies";
-
-    // const moviePosters = () => {
-    //     let loader = `<div class="loading"><img src="img/loading.gif"></div>`;
-    //     $("#container").html(loader);
-    //     fetch(url)
-    //         .then(resp => resp.json())
-    //         .then(movies => {
-    //             movieArray = movies;
-    //
-    //
-    //
-    //             let htmlStr = "";
-    //             let html = "";
-    //             for (let movie of movies) {
-    //
-    //                 //creates the dropdown menus for select
-    //                 html += `<option value=${movie.id}>${movie.title}</option>`;
-    //
-    //                 //creates movie posters
-    //                 htmlStr += `<div class="posters grow gradient-border"><div>`
-    //                 htmlStr += `<h1 class="title">${movie.title}</h1><div class="genre">${movie.genre}</div><img src=${movie.poster}>`;
-    //                 htmlStr += `<div class="underImgContainer"><div class="rating">${createStars(movie)}</div><div class="director">By: ${movie.director}</div></div>`;
-    //                 htmlStr += `<div class="description">${movie.plot}</div>`;
-    //                 htmlStr += `</div></div>`;
-    //             }
-    //
-    //             //pushes created card or dropdown menu to the screen
-    //             console.log(movies)
-    //             $("#container").html(htmlStr);
-    //             $("#selectMenu").html("<option value='-1' selected>Select a movie</option>" + html);
-    //             $("#selectMenu2").html("<option value='-1' selected>Select a movie</option>" + html);
-    //         });
-    // }
-    // moviePosters();
-
-    //========Show the edit menu========\\
-    $("#showEdit").click(function () {
-        $("#editMovie").toggleClass("hidden1");
-        $("#selectMenu").toggleClass("hidden1");
-    });
-    //hide edit menu
-    $("#changeMovie").click(function () {
-        $("#editMovie").toggleClass("hidden1");
-        $("#selectMenu").toggleClass("hidden1");
-    })
-
-    //========show the delete menu========\\
-    $(".remove-hidden").click(function () {
-        $("#selectMenu2").toggleClass("hidden1");
-        $("#delete-movie").toggleClass("hidden1");
-    });
-    //hide delete menu
-    $("#delete-movie").click(function () {
-        $("#selectMenu2").toggleClass("hidden1");
-        $("#delete-movie").toggleClass("hidden1");
-    })
-
-    //========show the post menu========\\
-    $("#post-id").click(function () {
-        $("#postMovie").toggleClass("hidden1");
-    });
-    //hide post menu
-    $("#newMovie").click(async function () {
-        let title = $(`#title`).val();
-        let director = $(`#director`).val();
-        let genre = $(`#genre`).val();
-
-        await addMovie({
-            title: title,
-            director: director,
-            genre: genre
-        });
-
-
-
-
-        // $("#postMovie").toggleClass("hidden1");
-        location.reload();
-    })
-
-    //when the option selected is changed, update the input fields
-    $("#selectMenu").change(function () {
-        let target = $(this).val()
-        console.log(target);
-
-        //grab info from the json file and populate the input fields
-        for (let movie of movieArray) {
-            if (movie.id == target) {
-                $("#newTitle").val(movie.title);
-                $("#newGenre").val(movie.genre);
-                $("#newRating").val(movie.rating);
-                $("#newDirector").val(movie.director);
-                $("#newPlot").val(movie.plot);
-            }
         }
-    })
 
-    function createStars(movie) {
-        let html = "";
-        for (let i = 0; i < movie.rating; i++) {
-            html += "<i class=\"fas fa-star\" style='color: yellow'></i>"
-        }
-        if (movie.rating !== 5) {
-            for (let j = movie.rating; j < 5; j++) {
-                html += "<i class=\"fas fa-star\"></i>";
-            }
-        }
-        return html;
+        $(`#movies-here`).html(html);
     }
 
-    //Edit selected movie
-    $("#changeMovie").click(function () {
-        let input = $("#selectMenu").val()
-        let insert = {
-            title: $("#newTitle").val(),
-            genre: $("#newGenre").val(),
-            rating: $("#newRating").val(),
-            director: $("#newDirector").val(),
-            plot: $("#newPlot").val()
-        }
-        let patchOptions = {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(insert)
-        }
-        //PATCH request
-        fetch(`${url}/${input}`, patchOptions)
-            .then(moviePosters);
-    });
+    await writeHtml();
 
-    //delete movie
-    let deleteOptions = {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    };
+    // end of page load
 
-    $("#selectMenu2").change(function () {
-        let inputVal = $(this).val();
-        console.log("hello: " + inputVal);
-        $("#delete-movie").click(function () {
-            //DELETE request
-            fetch(`${url}/${inputVal}`, deleteOptions)
-                .then(updateMovie);
+    // let delBtnHtml=`<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    //                 Delete a Movie
+    //             </button>`
+    // let delItemsHtml=``;
+    //
+    // movies.forEach(function(movie){
+    //     delItemsHtml +=`<li class="del-item" data-movie-id="${movie.id}">${movie.title}</li>`
+    // })
+    //
+    // $(`#delete-menu-here`).html(`${delBtnHtml}<ul class="dropdown-menu">${delItemsHtml}</ul>`);
+
+    $(document).on(`click`, `.del-item`, async (e) => {
+        let currentID = $(e.target).parent(`.this-item`).attr(`data-movie-id`)
+        console.log(e);
+        // $(`.del-item`).attr(`data-btn`);
+        console.log(currentID);
+        await deleteMovie({
+            id: currentID
         });
+        location.reload();
     });
 
+    let thisMovieID = ``;
 
-    //create a new movie
-    $('#newMovie').click((e) => {
+    $(document).on(`click`, `.up-item`, async (e) => {
+        thisMovieID = $(e.target).parent(`.this-item`).attr(`data-movie-id`);
+        $(`.change-box`).toggleClass(`hidden`);
+        console.log(thisMovieID);
+    });
+
+    $(document).on(`click`, `#changeMovie`, async (e) => {
         e.preventDefault();
-
-        let addMovie = {
-            title: $("#title").val(),
-            genre: $("#genre").val(),
-            rating: $("#rating").val(),
-            director: $("#director").val(),
-            plot: $("#plot").val()
-        }
-        let postOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(addMovie)
-        }
-        //POST movie
-        fetch(url, postOptions)
-            .then(resp => resp.json())
-            .then(moviePosters).catch(error => console.log(error))
+        let title = $(`#newTitle`).val() === `` ? $(e.target).parent(`.this-item`).attr(`data-movie-title`) : $(`.newTitle`).val();
+        let director = $(`#newDirector`).val() === `` ? $(e.target).parent(`.this-item`).attr(`data-movie-director`) : $(`.newDirector`).val();
+        let year = $(`#newYear`).val() === `` ? $(e.target).parent(`.this-item`).attr(`data-movie-year`) : $(`.newYear`).val();
+        let genre = $(`#newGenre`).val() === `` ? $(e.target).parent(`.this-item`).attr(`data-movie-genre`) : $(`.newGenre`).val();
+        console.log(title)
+        console.log(director)
+        console.log(year)
+        console.log(genre)
+        await updateMovie({
+            id: thisMovieID,
+            title: title,
+            director: director,
+            year: year,
+            genre: genre,
+        });
+        location.reload();
     });
 
-    // end of first POSTED code
 
 
+})();
 
-    })();
-
-
-//
-// $(document).ready(function () {
-
-//
-// //end of document ready

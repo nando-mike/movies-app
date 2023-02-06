@@ -9,8 +9,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-firestore.js"></script>
 
     <!-- BOOTSTRAP LINK -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
     <!-- KEYS SCRIPT JS -->
     <script src="js/keys.js"></script>
@@ -30,10 +30,10 @@
         background-color: darkgrey;
     }
 
-
 </style>
 
 <body>
+
 <!-- PAGE WRAPPER -->
 <div class="page wrapper" id="background-image">
 
@@ -49,77 +49,55 @@
 
 
     <!-- DISPLAY MOVIES -->
-    <div class="container-fluid gap-3 rounded" id="display-movies">
-        <div class="row">
-            <div class="col d-flex" id="movies-here">
+    <div class="container d-flex" id="display-movies">
+        <div class="row flex-grow-1 d-flex" id="movies-here">
 
-            </div>
         </div>
     </div>
 
-    <!-- CHANGE BUTTONS -->
-    <div class="container container-fluid mt-5 d-flex border border-dark rounded" id="button-shadow">
-<!--        <a class="navbar-brand"> </a>-->
-        <div class="row">
-            <div class="col">
-                <div class="d-flex row" id="buttons">
-                    <div class="hidden1 editMovie" id="editMovie">
-                        <label for="newTitle">Change Title </label>
-                        <input type="text" id="newTitle">
-                        <br>
-                        <label for="newGenre">Change Genre </label>
-                        <input type="text" id="newGenre">
-                        <br>
-                        <label for="newRating">Change Rating </label>
-                        <input type="text" id="newRating">
-                        <br>
-                        <label for="newDirector">Change Director </label>
-                        <input type="text" id="newDirector">
-                        <br>
-                        <div class="textBox">
-                            <label for="newPlot">Change plot </label>
-                            <textarea id="newPlot" rows="3" cols="30"></textarea>
+    <!--    big container-->
+    <div class="container d-flex mt-5">
+        <div class="row d-flex flex-grow-1 justify-content-between">
+                <!-- CHANGE BUTTONS -->
+                <div class="col-6 change-box hidden">
+                    <div class="d-flex row" id="buttons">
+                        <div class="hidden1 editMovie" id="editMovie">
+                            <label for="newTitle">Change Title </label>
+                            <input type="text" id="newTitle" class="newTitle">
+                            <br>
+                            <label for="newGenre">Change Genre </label>
+                            <input type="text" id="newGenre" class="newGenre">
+                            <br>
+                            <label for="newYear">Change Year </label>
+                            <input type="text" id="newYear" class="newYear">
+                            <br>
+                            <label for="newDirector">Change Director </label>
+                            <input type="text" id="newDirector" class="newDirector">
+                            <br>
+                            <button id="changeMovie" class="btn btn-outline-secondary">Update Movie</button>
                         </div>
-                        <br>
-                        <button id="changeMovie" class="btn btn-outline-secondary">Update Movie</button>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- DELETE MENU -->
-        <div class="">
-            <button class="remove-hidden btn btn-outline-secondary">Delete a movie</button>
-            <div class="deleteGroup">
-                <select id="selectMenu2" class="hidden1 select">
-                    <option>Delete a movie</option>
-                </select>
-                <button id="delete-movie" class="hidden1 btn btn-danger">Delete movie</button>
-            </div>
-        </div>
+                <!-- POST MENU / ADD MOVIE -->
 
-        <!-- POST MENU -->
-        <div class="">
-            <div class="hidden1 editMovie" id="postMovie">
-                <label for="title">Title </label>
-                <input type="text" id="title">
-                <br>
-                <label for="genre">Genre </label>
-                <input type="text" id="genre">
-                <br>
-                <label for="rating">Rating </label>
-                <input type="text" id="rating">
-                <br>
-                <label for="director">Director </label>
-                <input type="text" id="director">
-                <br>
-                <div class="textBox">
-                    <label for="plot">Plot </label>
-                    <textarea id="plot" rows="5" cols="40"></textarea>
+                <div class="col-6">
+                    <div class="hidden1 editMovie" id="postMovie">
+                        <label for="title">Title </label>
+                        <input type="text" id="title">
+                        <br>
+                        <label for="genre">Genre </label>
+                        <input type="text" id="genre">
+                        <br>
+                        <label for="rating">Rating </label>
+                        <input type="text" id="rating">
+                        <br>
+                        <label for="director">Director </label>
+                        <input type="text" id="director">
+                        <br>
+                        <button id="newMovie" class="btn button-outline-secondary">Add Movie</button>
+                    </div>
                 </div>
-                <br>
-                <button id="newMovie" class="btn button-outline-secondary">Add Movie</button>
-            </div>
         </div>
     </div>
 
@@ -141,8 +119,8 @@
         crossorigin="anonymous"></script>
 
 <!-- BOOTSTRAP SCRIPT -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
 
 <!-- UTILITIES AND HIGHER LEVEL FUNCTIONS TO SIMPLIFY DATABASE FETCHES -->
