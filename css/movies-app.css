@@ -44,7 +44,7 @@
     background-color: #5e72e4 !important;
 }
 
-.del-item{
+.del-item {
     cursor: pointer;
 }
 
@@ -52,11 +52,11 @@
     visibility: hidden;
 }
 
-.movie-card{
+.movie-card {
     width: 300px;
 }
 
-.movies-box{
+.movies-box {
     height: 372px;
 }
 
@@ -77,4 +77,8 @@
 .loading-text {
     color: white;
     text-shadow: 2px 1px black;
+}
+
+input:hover {
+    background-color: mintcream;
 }
