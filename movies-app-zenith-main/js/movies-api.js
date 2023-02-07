@@ -64,8 +64,6 @@ const addMovie = async (movie) => {
 // }
 
 
-
-
 /** ADDED MOVIE OBJECT */
 
 // let movieObject = {

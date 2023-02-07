@@ -13,13 +13,13 @@
 
     console.log(movieTitles);
 
-    let movieIDs = movies.map(function(obj){
+    let movieIDs = movies.map(function (obj) {
         return obj.id;
     });
 
     console.log(movieIDs);
 
-// loop gets posters from api
+// LOOP THAT GETS POSTERS FROM API //
     let moviePosters = [];
     const getThePosters = async () => {
         for (let i = 0; i < movieTitles.length; i += 1) {
@@ -42,7 +42,7 @@
 
     const writeHtml = () => {
 
-        for(let i = 0; i < movies.length; i += 1){
+        for (let i = 0; i < movies.length; i += 1) {
             html += `<div class="card mt-3 p-3 d-flex flex-column this-item movie-card" data-movie-id="${movieIDs[i]}" data-movie-title="${movies[i].title}" data-movie-year="${movies[i].year}" data-movie-genre="${movies[i].genre}" data-movie-director="${movies[i].director}">
   <div class="card-body">
   <img src="http://image.tmdb.org/t/p/w500/${moviePosters[i]}" class="poster" alt="current movie poster">
@@ -106,7 +106,7 @@ Update
         location.reload();
     });
 
-    $(document).on(`click`, `#newMovie`, async (e) =>{
+    $(document).on(`click`, `#newMovie`, async (e) => {
         e.preventDefault();
         let title = $(`#title`).val();
         let director = $(`#director`).val();
@@ -124,7 +124,6 @@ Update
         });
         location.reload();
     })
-
 
 
 })();
