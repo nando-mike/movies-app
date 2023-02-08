@@ -2,24 +2,30 @@
 
     "use strict";
 
-// MOVIES ARRAY //
+    // SUPER AWESOME WINDOWS XP SOUND //
+    $(`button`).on(`click`, function (e) {
+        e.preventDefault();
+        $("#windows-xp-startup-sounds")[0].play();
+    })
+
+// MOVIES ARRAY COMING FROM FIREBASE//
     let movies = await getMovies();
     console.log(movies);
 
-// MAP ARRAY //
+// MAPPING THE MOVIES ARRAY TO CREATE AN ARRAY OF MOVIE TITLES //
     let movieTitles = movies.map(function (obj) {
         return obj.title;
     });
 
     console.log(movieTitles);
-
+// MAPPING THE MOVIES ARRAY TO CREATE AN ARRAY OF MOVIE ID'S //
     let movieIDs = movies.map(function (obj) {
         return obj.id;
     });
 
     console.log(movieIDs);
 
-// LOOP THAT GETS POSTERS FROM API //
+// ASYNC FUNCTION THAT LOOPS AND GETS POSTERS FROM API //
     let moviePosters = [];
     const getThePosters = async () => {
         for (let i = 0; i < movieTitles.length; i += 1) {
@@ -37,11 +43,10 @@
     await getThePosters();
     console.log(moviePosters)
 
+// CARD BODY WRITTEN DYNAMICALLY TO PAGE WITH JAVASCRIPT//
     let html = ``;
 
-
     const writeHtml = () => {
-
         for (let i = 0; i < movies.length; i += 1) {
             html += `<div class="card mt-3 p-3 d-flex flex-column this-item movie-card" data-movie-id="${movieIDs[i]}" data-movie-title="${movies[i].title}" data-movie-year="${movies[i].year}" data-movie-genre="${movies[i].genre}" data-movie-director="${movies[i].director}">
   <div class="card-body">
@@ -67,6 +72,9 @@ Update
     await writeHtml();
     // END OF PAGE LOAD //
 
+    // EVENT LISTENERS BOI!//
+
+    // DELETE MOVIE BUTTON //
     $(document).on(`click`, `.del-item`, async (e) => {
         let currentID = $(e.target).parent(`.this-item`).attr(`data-movie-id`)
         console.log(e);
@@ -79,13 +87,13 @@ Update
     });
 
     let thisMovieID = ``;
-
     $(document).on(`click`, `.up-item`, async (e) => {
         thisMovieID = $(e.target).parent(`.this-item`).attr(`data-movie-id`);
         $(`.change-box`).toggleClass(`hidden`);
         console.log(thisMovieID);
     });
 
+// CHANGE MOVIE BUTTON //
     $(document).on(`click`, `#changeMovie`, async (e) => {
         e.preventDefault();
         let title = $(`#newTitle`).val() === `` ? $(e.target).parent(`.this-item`).attr(`data-movie-title`) : $(`.newTitle`).val();
@@ -106,6 +114,7 @@ Update
         location.reload();
     });
 
+// ADD NEW MOVIE BUTTON //
     $(document).on(`click`, `#newMovie`, async (e) => {
         e.preventDefault();
         let title = $(`#title`).val();
@@ -124,7 +133,6 @@ Update
         });
         location.reload();
     })
-
 
 })();
 
