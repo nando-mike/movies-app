@@ -30,17 +30,23 @@
 <!-- PAGE WRAPPER -->
 <div class="page-wrapper">
 
+    <!-- SOUNDS -->
+    <audio id="windows-xp-startup-sounds" preload="auto">
+        <source src="../sounds/windows-xp-startup.mp3" type="audio/mpeg">
+    </audio>
+
     <!-- NAV BAR -->
     <nav class="navbar sticky-top mb-0 d-flex justify-content-start" style="background-color:#394dcd;" id="nav">
         <img src="images/windows-vista-icon-logo-427D6813BD-seeklogo.com.png" class="vista-logo ps-5"
              alt="windows vista logo">
-        <h4 class="text-light ps-3"><i class="fas fa-film"></i>Windows Vista Movie's</h4>
+        <h4 class="text-light ps-3"><i class="fas fa-film"></i>Windows XP Movie's</h4>
         <a class="text-light" href="#"><i class="fas fa-bell"></i><i class="far fa-user-circle"></i></a>
     </nav>
 
-    <!-- DISPLAY MOVIES -->
+    <!-- DISPLAY MOVIES DYNAMIC -->
     <div class="container d-flex movie-box" id="display-movies">
         <div class="row flex-grow-1 d-flex justify-content-evenly p-6" id="movies-here">
+            <!--            // LOADING QUE//-->
             <h1 class="loading-text">Your Library is Loading...</h1>
         </div>
     </div>
@@ -105,8 +111,6 @@
 
 </body>
 </html>
-
-
 
 
 
